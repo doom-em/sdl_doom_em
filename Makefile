@@ -84,6 +84,7 @@ clean:
 	rm -f linux/*
 
 $(O)/sdl_doom:	$(OBJS) $(O)/i_main.o
+	mkdir -p linux
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(O)/i_main.o \
 	-o $(O)/sdl_doom $(LIBS)
 
