@@ -1,0 +1,37 @@
+name: Build & Deploy Engine
+on: [push, pull_request]
+jobs:
+#  cleanup:
+#    runs-on: self-hosted
+#    steps:
+#    - name: Cleanup
+#      run: rm -rf .* || true
+  build:
+    runs-on: ${{ matrix.os }}
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-20.04
+            targetos: linux
+            targetarch: i386
+    env:
+      SDL_VERSION: 2.30.3
+      GH_CPU_ARCH: ${{ matrix.targetarch }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Install dependencies
+      run: echo None as of now
+    - name: Setup Emscripten toolchain
+      uses: mymindstorm/setup-emsdk@v14
+    - name: Build engine
+      run: emmake make
+    - name: Upload engine (artifacts)
+      uses: actions/upload-artifact@v4
+      with:
+        name: artifact-${{ matrix.targetos }}-${{ matrix.targetarch }}
+        path: /*
