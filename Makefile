@@ -4,9 +4,9 @@
 #
 # $Log:$
 #
-CC=  gcc # gcc or g++
+CC=  emcc # gcc or g++
 
-CFLAGS=-m32 -g -Wall -DNORMALUNIX -DLINUX -DSDL # -DUSEASM 
+CFLAGS=-m32 -g -s USE_SDL=2 -Wall -DNORMALUNIX -DLINUX -DSDL # -DUSEASM 
 LDFLAGS=-L/usr/lib/i386-linux-gnu/
 LIBS=-lSDL #-lnsl -lm
 
@@ -86,7 +86,7 @@ clean:
 $(O)/sdl_doom:	$(OBJS) $(O)/i_main.o
 	mkdir -p linux
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(O)/i_main.o \
-	-o $(O)/sdl_doom $(LIBS)
+	-o $(O)/sdl_doom.html $(LIBS)
 
 $(O)/%.o:	%.c
 	$(CC) $(CFLAGS) -c $< -o $@
