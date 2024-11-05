@@ -30,7 +30,7 @@ rcsid[] = "$Id: i_x.c,v 1.6 1997/02/03 22:45:10 b1 Exp $";
 #include <sys/ipc.h>
 #include <sys/shm.h>
 
-#include <SDL2/SDL.h>
+#include <SDL/SDL.h>
 
 #include <stdarg.h>
 #include <sys/time.h>
