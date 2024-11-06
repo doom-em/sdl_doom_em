@@ -7,7 +7,7 @@
 CC=  emcc # gcc or g++
 
 CFLAGS=-m32 -g -s USE_SDL=2 -Wall -DNORMALUNIX -DLINUX -DSDL # -DUSEASM 
-LDFLAGS=-O3 -L/usr/lib/i386-linux-gnu/
+LDFLAGS=-O3 # -L/usr/lib/i386-linux-gnu/
 LIBS=-lSDL -lopenal #-lnsl -lm
 
 # subdirectory for objects
