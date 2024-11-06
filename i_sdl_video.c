@@ -30,7 +30,7 @@ rcsid[] = "$Id: i_x.c,v 1.6 1997/02/03 22:45:10 b1 Exp $";
 #include <sys/ipc.h>
 #include <sys/shm.h>
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 #include <stdarg.h>
 #include <sys/time.h>
@@ -88,7 +88,7 @@ void I_InitGraphics(void)
     X_width = SCREENWIDTH * multiply;
     X_height = SCREENHEIGHT * multiply;
 
-    if ( SDL_Init(SDL_INIT_EVERYTHING) != 0 ) {
+    if ( SDL_Init(SDL_INIT_VIDEO) != 0 ) {
         I_Error(SDL_GetError());
     }
 
