@@ -1586,9 +1586,9 @@ void G_DoPlayDemo (void)
 	 
     gameaction = ga_nothing; 
     demobuffer = demo_p = W_CacheLumpName (defdemoname, PU_STATIC); 
-    if ( *demo_p++ != VERSION)
+    if ( *demo_p++ > VERSION)
     {
-      fprintf( stderr, "Demo is from a different game version!\nDemo: %d\nGame: %d\n", *demo_p, VERSION);
+      fprintf( stderr, "Demo is from a different game version! Demo: %d, Game: %d\n", *demo_p, VERSION);
       gameaction = ga_nothing;
       return;
     }
