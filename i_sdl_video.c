@@ -89,7 +89,7 @@ void I_InitGraphics(void)
     X_height = SCREENHEIGHT * multiply;
 
     if ( SDL_Init(SDL_INIT_EVERYTHING) != 0 ) {
-        I_Error(SDL_GetError())
+        I_Error(SDL_GetError());
     }
 
     screen = SDL_SetVideoMode(X_width, X_height, SDL_BPP, SDL_SWSURFACE);
