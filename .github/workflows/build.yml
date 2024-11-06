@@ -45,11 +45,22 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - name: Download All Artifacts
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        ref: ghpages
+    - name: Download Artifact
       uses: actions/download-artifact@v4
       with:
-        path: artifact
+        path: ./
         pattern: artifact-*
         merge-multiple: true
-    - run: ls -R artifact
+    - name: Push to GH Pages
+      run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Update GH Pages as per master branch"
+          git push
+    
           
