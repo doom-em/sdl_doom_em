@@ -35,7 +35,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpq93gfbn5.js
+// include: /tmp/tmp0mm3179o.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -145,7 +145,6 @@ var REMOTE_PACKAGE_SIZE = metadata['remote_package_size'];
       function assert(check, msg) {
         if (!check) throw msg + new Error().stack;
       }
-Module['FS_createPath']("/", "doom_assets", true, true);
 
       /** @constructor */
       function DataRequest(start, end, audio) {
@@ -212,25 +211,25 @@ Module['FS_createPath']("/", "doom_assets", true, true);
     }
 
     }
-    loadPackage({"files": [{"filename": "/doom_assets/doom1.wad", "start": 0, "end": 4196020}], "remote_package_size": 4196020});
+    loadPackage({"files": [{"filename": "/doom1.wad", "start": 0, "end": 4196020}], "remote_package_size": 4196020});
 
   })();
 
-// end include: /tmp/tmpq93gfbn5.js
-// include: /tmp/tmp1i_keobj.js
+// end include: /tmp/tmp0mm3179o.js
+// include: /tmp/tmp_cdntj98.js
 
     // All the pre-js content up to here must remain later on, we need to run
     // it.
     if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD)) Module['preRun'] = [];
     var necessaryPreJSTasks = Module['preRun'].slice();
-  // end include: /tmp/tmp1i_keobj.js
-// include: /tmp/tmptbi9bcu8.js
+  // end include: /tmp/tmp_cdntj98.js
+// include: /tmp/tmp0mfrs3sp.js
 
     if (!Module['preRun']) throw 'Module.preRun should exist because file support used it; did a pre-js delete it?';
     necessaryPreJSTasks.forEach((task) => {
       if (Module['preRun'].indexOf(task) < 0) throw 'All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?';
     });
-  // end include: /tmp/tmptbi9bcu8.js
+  // end include: /tmp/tmp0mfrs3sp.js
 
 
 // Sometimes an existing Module object exists with properties
