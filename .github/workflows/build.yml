@@ -13,12 +13,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-20.04
+          - os: ubuntu-latest
             targetos: linux
             targetarch: i386
     env:
       SDL_VERSION: 2.30.3
-      GH_CPU_ARCH: ${{ matrix.targetarch }}
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -42,4 +41,15 @@ jobs:
           ./linux/*
           !./linux/*.o
           !./linux/*.html
+  download:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download All Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: artifact
+        pattern: artifact-*
+        merge-multiple: true
+    - run: ls -R artifact
           
