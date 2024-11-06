@@ -35,7 +35,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmp_u4zm6_7.js
+// include: /tmp/tmp2t3ac37a.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -211,11 +211,11 @@ var REMOTE_PACKAGE_SIZE = metadata['remote_package_size'];
     }
 
     }
-    loadPackage({"files": [{"filename": "/doom1.wad", "start": 0, "end": 4196020}], "remote_package_size": 4196020});
+    loadPackage({"files": [{"filename": "/doom.wad", "start": 0, "end": 11159840}], "remote_package_size": 11159840});
 
   })();
 
-// end include: /tmp/tmp_u4zm6_7.js
+// end include: /tmp/tmp2t3ac37a.js
 
 
 // Sometimes an existing Module object exists with properties
