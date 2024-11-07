@@ -7646,7 +7646,7 @@ var ASM_CONSTS = {
 
   var _emscripten_asm_const_ptr_sync_on_main_thread = (emAsmAddr, sigPtr, argbuf) => runMainThreadEmAsm(emAsmAddr, sigPtr, argbuf, 1);
 
-  var _emscripten_date_now = () => return 0;
+  var _emscripten_date_now = () => 0;
 
   var JSEvents = {
   removeAllEventListeners() {
