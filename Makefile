@@ -6,8 +6,8 @@
 #
 CC=  emcc # gcc or g++
 
-CFLAGS=-m32 -g -s USE_SDL=2 -Wall -DNORMALUNIX -DLINUX -DSDL # -DUSEASM 
-LDFLAGS=-O3 # -L/usr/lib/i386-linux-gnu/
+CFLAGS=-m32 -O3 -g -s USE_SDL=2 -Wall -DNORMALUNIX -DLINUX -DSDL # -DUSEASM 
+LDFLAGS=# -L/usr/lib/i386-linux-gnu/
 LIBS=-lSDL -lopenal #-lnsl -lm
 
 # subdirectory for objects
@@ -85,7 +85,7 @@ clean:
 
 $(O)/sdl_doom:	$(OBJS) $(O)/i_main.o
 	mkdir -p linux
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(O)/i_main.o \
+	$(CC) -v $(CFLAGS) $(LDFLAGS) $(OBJS) $(O)/i_main.o \
 	-o $(O)/sdl_doom.html --preload-file doom_assets/doom.wad@doom.wad $(LIBS)
 
 $(O)/%.o:	%.c
