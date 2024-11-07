@@ -62,7 +62,7 @@ jobs:
     - name: Uglify JS for faster runtime (probably)
       run: |
           npm install uglify-js -g
-          uglifyjs sdl_doom.js -c
+          uglifyjs sdl_doom.js -c > sdl_doom.js.min
           rm sdl_doom.js
           mv sdl_doom.js.min sdl_doom.js
     - name: Push to GH Pages
