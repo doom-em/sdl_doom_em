@@ -28,7 +28,6 @@
 static const char
 rcsid[] = "$Id: p_spec.c,v 1.6 1997/02/03 22:45:12 b1 Exp $";
 
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "doomdef.h"
@@ -168,7 +167,7 @@ void P_InitPicAnims (void)
 	{
 	    if (W_CheckNumForName(animdefs[i].startname) == -1)
 		continue;
-	    printf("W_CheckNumForName: %s : %d, %s : %d", animdefs[i].startname, W_CheckNumForName(animdefs[i].startname), animdefs[i].endname, W_CheckNumForName(animdefs[i].endname));
+
 	    lastanim->picnum = R_FlatNumForName (animdefs[i].endname);
 	    lastanim->basepic = R_FlatNumForName (animdefs[i].startname);
 	}
