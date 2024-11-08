@@ -167,7 +167,7 @@ void P_InitPicAnims (void)
 	{
 	    if (W_CheckNumForName(animdefs[i].startname) == -1)
 		continue;
-	    printf("W_CheckNumForName: %f, %f", W_CheckNumForName(animdefs[i].startname), W_CheckNumForName(animdefs[i].endname))
+	    printf("W_CheckNumForName: %f, %f", W_CheckNumForName(animdefs[i].startname), W_CheckNumForName(animdefs[i].endname));
 	    lastanim->picnum = R_FlatNumForName (animdefs[i].endname);
 	    lastanim->basepic = R_FlatNumForName (animdefs[i].startname);
 	}
