@@ -24,15 +24,13 @@
 #ifndef __DOOMTYPE__
 #define __DOOMTYPE__
 
+#include <stdbool.h>
 
 #ifndef __BYTEBOOL__
 #define __BYTEBOOL__
-// Fixed to use builtin bool type with C++.
-#ifdef __cplusplus
+// Uses Bool type no matter what
 typedef bool boolean;
-#else
-typedef enum {false, true} boolean;
-#endif
+
 typedef unsigned char byte;
 #endif
 
