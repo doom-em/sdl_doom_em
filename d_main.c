@@ -95,7 +95,7 @@ static const char rcsid[] = "$Id: d_main.c,v 1.8 1997/02/03 22:45:09 b1 Exp $";
 //  calls all ?_Responder, ?_Ticker, and ?_Drawer,
 //  calls I_GetTime, I_StartFrame, and I_StartTic
 //
-bool D_DoomEmscriptenTic (double time, void* userData);
+int D_DoomEmscriptenTic (double time, void* userData);
 void D_DoomLoop (void);
 
 
@@ -358,7 +358,7 @@ void D_Display (void)
 //  D_DoomEmscriptenTic
 //
 
-bool D_DoomEmscriptenTic (double time, void* userData)
+int D_DoomEmscriptenTic (double time, void* userData)
 {
 	// frame syncronous IO operations
 	/*I_StartFrame ();                
