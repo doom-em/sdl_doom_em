@@ -680,7 +680,7 @@ int R_FlatNumForName (char* name)
     {
 	namet[8] = 0;
 	memcpy (namet, name,8);
-	I_Error ("R_FlatNumForName: %s not found\nW_CheckNumForName: %s : %d, %s : %d", namet, animdefs[i].startname, W_CheckNumForName(animdefs[i].startname), animdefs[i].endname, W_CheckNumForName(animdefs[i].endname));
+	I_Error ("R_FlatNumForName: %s not found\nW_CheckNumForName: %s : %d", namet, namet, i);
     }
     return i - firstflat;
 }
