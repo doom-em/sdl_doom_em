@@ -40,6 +40,10 @@ static const char rcsid[] = "$Id: d_main.c,v 1.8 1997/02/03 22:45:09 b1 Exp $";
 #include <fcntl.h>
 #endif
 
+// libs for emscripten
+
+#include <emscripten.h>
+#include <emscripten/html5.h>
 
 #include "doomdef.h"
 #include "doomstat.h"
@@ -349,30 +353,12 @@ void D_Display (void)
     } while (!done);
 }
 
-
-
 //
-//  D_DoomLoop
+//  D_DoomEmscriptenTic
 //
-extern  boolean         demorecording;
 
-void D_DoomLoop (void)
+void D_DoomEmscriptenTic (void)
 {
-    if (demorecording)
-	G_BeginRecording ();
-		
-    if (M_CheckParm ("-debugfile"))
-    {
-	char    filename[20];
-	sprintf (filename,"debug%i.txt",consoleplayer);
-	printf ("debug output to: %s\n",filename);
-	debugfile = fopen (filename,"w");
-    }
-	
-    I_InitGraphics ();
-
-    while (1)
-    {
 	// frame syncronous IO operations
 	I_StartFrame ();                
 	
@@ -408,7 +394,29 @@ void D_DoomLoop (void)
 	// Update sound output.
 	I_SubmitSound();
 #endif
+}
+
+//
+//  D_DoomLoop
+//
+extern  boolean         demorecording;
+
+void D_DoomLoop (void)
+{
+    if (demorecording)
+	G_BeginRecording ();
+		
+    if (M_CheckParm ("-debugfile"))
+    {
+	char    filename[20];
+	sprintf (filename,"debug%i.txt",consoleplayer);
+	printf ("debug output to: %s\n",filename);
+	debugfile = fopen (filename,"w");
     }
+	
+    I_InitGraphics ();
+
+    emscripten_request_animation_frame_loop(D_DoomEmscriptenTic, 0);
 }
 
 
