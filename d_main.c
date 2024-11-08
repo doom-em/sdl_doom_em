@@ -362,7 +362,7 @@ void D_Display (void)
 bool D_DoomEmscriptenTic (double time, void* userData)
 {
 	// frame syncronous IO operations
-	/*I_StartFrame ();                
+	I_StartFrame ();                
 	
 	// process one or more tics
 	if (singletics)
@@ -395,7 +395,7 @@ bool D_DoomEmscriptenTic (double time, void* userData)
 #ifndef SNDINTR
 	// Update sound output.
 	I_SubmitSound();
-#endif*/
+#endif
 	return true;
 }
 
