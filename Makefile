@@ -86,7 +86,7 @@ clean:
 $(O)/sdl_doom:	$(OBJS) $(O)/i_main.o
 	mkdir -p linux
 	$(CC) -v $(CFLAGS) $(LDFLAGS) $(OBJS) $(O)/i_main.o \
-	-o $(O)/sdl_doom.html --preload-file doom_assets/doom.wad@doom.wad $(LIBS)
+	-o $(O)/sdl_doom.html --preload-file doom_assets/DOOM1.WAD@doom1.wad $(LIBS)
 
 $(O)/%.o:	%.c
 	$(CC) $(CFLAGS) -c $< -o $@
