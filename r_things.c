@@ -126,7 +126,7 @@ R_InstallSpriteLump
 		     "multip rot=0 lump", spritename, 'A'+frame);
 
 	if (sprtemp[frame].rotate == true)
-	    I_Error ("R_InitSprites: Sprite %s frame %c has rotations "
+	    I_Error ("R_InitSprites: Rotated with no rotation: Sprite %s frame %c has rotations "
 		     "and a rot=0 lump", spritename, 'A'+frame);
 			
 	sprtemp[frame].rotate = false;
@@ -140,7 +140,7 @@ R_InstallSpriteLump
 	
     // the lump is only used for one rotation
     if (sprtemp[frame].rotate == false)
-	I_Error ("R_InitSprites: Sprite %s frame %c has rotations "
+	I_Error ("R_InitSprites: With rotation not rotated: Sprite %s frame %c has rotations "
 		 "and a rot=0 lump", spritename, 'A'+frame);
 		
     sprtemp[frame].rotate = true;
