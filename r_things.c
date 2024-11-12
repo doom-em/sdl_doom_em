@@ -117,10 +117,12 @@ R_InstallSpriteLump
 	
     if ((int)frame > maxframe)
 	maxframe = frame;
-		
+
+    printf("Sprite %s frame %c loaded. Rotation: %d To rotate: %d\n", spritename, 'A'+frame, rotation, sprtemp[frame].rotate)
     if (rotation == 0)
     {
 	// the lump should be used for all rotations
+	
 	if (sprtemp[frame].rotate == 0)
 	    I_Error ("R_InitSprites: Sprite %s frame %c has "
 		     "multip rot=0 lump", spritename, 'A'+frame);
