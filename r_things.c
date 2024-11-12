@@ -121,15 +121,15 @@ R_InstallSpriteLump
     if (rotation == 0)
     {
 	// the lump should be used for all rotations
-	if (sprtemp[frame].rotate == false)
+	if (sprtemp[frame].rotate == 0)
 	    I_Error ("R_InitSprites: Sprite %s frame %c has "
 		     "multip rot=0 lump", spritename, 'A'+frame);
 
-	if (sprtemp[frame].rotate == true)
+	if (sprtemp[frame].rotate == 1)
 	    I_Error ("R_InitSprites: Rotated with no rotation: Sprite %s frame %c has rotations "
 		     "and a rot=0 lump", spritename, 'A'+frame);
 			
-	sprtemp[frame].rotate = false;
+	sprtemp[frame].rotate = 0;
 	for (r=0 ; r<8 ; r++)
 	{
 	    sprtemp[frame].lump[r] = lump - firstspritelump;
@@ -139,11 +139,11 @@ R_InstallSpriteLump
     }
 	
     // the lump is only used for one rotation
-    if (sprtemp[frame].rotate == false)
+    if (sprtemp[frame].rotate == 0)
 	I_Error ("R_InitSprites: With rotation not rotated: Sprite %s frame %c has rotations "
 		 "and a rot=0 lump", spritename, 'A'+frame);
 		
-    sprtemp[frame].rotate = true;
+    sprtemp[frame].rotate = 1;
 
     // make 0 based
     rotation--;		
@@ -226,13 +226,13 @@ void R_InitSpriteDefs (char** namelist)
 		else
 		    patched = l;
 
-		R_InstallSpriteLump (patched, frame, rotation, false);
+		R_InstallSpriteLump (patched, frame, rotation, 0);
 
 		if (lumpinfo[l].name[6])
 		{
 		    frame = lumpinfo[l].name[6] - 'A';
 		    rotation = lumpinfo[l].name[7] - '0';
-		    R_InstallSpriteLump (l, frame, rotation, true);
+		    R_InstallSpriteLump (l, frame, rotation, 1);
 		}
 	    }
 	}
