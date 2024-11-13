@@ -31,6 +31,8 @@
 #ifdef __cplusplus
 typedef bool boolean;
 #else
+#undef true
+#undef false
 typedef enum {false, true} boolean;
 #endif
 typedef unsigned char byte;
