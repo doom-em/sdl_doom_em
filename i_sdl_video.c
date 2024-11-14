@@ -58,7 +58,7 @@ SDL_Window*     screen = NULL;
 SDL_Renderer*   renderer = NULL;
 SDL_Texture*    texture = NULL;
 static SDL_Color colors[256];
-uint32_t *pixels = malloc(X_width * X_height);
+uint32_t *pixels;
 int		X_width;
 int		X_height;
 
@@ -91,7 +91,8 @@ void I_InitGraphics(void)
 
     X_width = SCREENWIDTH * multiply;
     X_height = SCREENHEIGHT * multiply;
-
+    pixels = malloc(X_width * X_height);
+    
     if ( SDL_Init(SDL_INIT_VIDEO) != 0 ) {
         I_Error((char*)SDL_GetError());
     }
@@ -107,7 +108,7 @@ void I_InitGraphics(void)
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
 
-    texture = SDL_CreateTexture(sdlRenderer,
+    texture = SDL_CreateTexture(renderer,
                                SDL_PIXELFORMAT_ARGB8888,
                                SDL_TEXTUREACCESS_STREAMING,
                                X_width, X_height);
@@ -116,7 +117,7 @@ void I_InitGraphics(void)
     }
 
     if (multiply == 1)
-    	screens[0] = malloc(X_width * X_height)
+    	screens[0] = malloc(X_width * X_height);
     else
     	I_Error("Unsupported Mode");
 
@@ -135,9 +136,13 @@ void I_UpdateNoBlit (void)
 
 void I_FinishUpdate (void)
 {
+	register int	       i;
+	register SDL_Color color;
+
+	
 	for (i=0 ; i<(X_width * X_height) ; i++)
 	{
-		SDL_Color color = palatte[screens[0][i]];
+		color = colors[screens[0][i]];
 		pixels[i] = (255 << 24) | (color.r << 16) | (color.g << 8) | (color.b);
 	}
 	SDL_UpdateTexture(texture, NULL, pixels, 640 * sizeof (uint32_t));
