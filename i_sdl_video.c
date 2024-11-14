@@ -240,11 +240,7 @@ int xlatekey(SDL_Event* event)
 	break;
 
       case SDLK_LALT:
-      case SDLK_LMETA:
       case SDLK_RALT:
-      case SDLK_RMETA:
-	rc = KEY_RALT;
-	break;
 
       default:
 	if (rc >= SDLK_SPACE && rc <= SDLK_DELETE)
