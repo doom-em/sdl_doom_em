@@ -30,7 +30,7 @@ rcsid[] = "$Id: i_x.c,v 1.6 1997/02/03 22:45:10 b1 Exp $";
 #include <sys/ipc.h>
 #include <sys/shm.h>
 
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 #include <stdarg.h>
 #include <sys/time.h>
@@ -54,7 +54,11 @@ rcsid[] = "$Id: i_x.c,v 1.6 1997/02/03 22:45:10 b1 Exp $";
 // SDL pixel color depth
 #define SDL_BPP 8
 
-SDL_Surface* screen = NULL;
+SDL_Window*     screen = NULL;
+SDL_Renderer*   renderer = NULL;
+SDL_Texture*    texture = NULL;
+static SDL_Color colors[256];
+uint32_t *pixels = malloc(X_width * X_height);
 int		X_width;
 int		X_height;
 
@@ -92,14 +96,27 @@ void I_InitGraphics(void)
         I_Error((char*)SDL_GetError());
     }
 
-    screen = SDL_SetVideoMode(X_width, X_height, SDL_BPP, SDL_SWSURFACE);
+    screen = SDL_CreateWindow("DOOM: SDL Edition",
+                          SDL_WINDOWPOS_UNDEFINED,
+                          SDL_WINDOWPOS_UNDEFINED,
+                          X_width, X_height,
+                          SDL_WINDOW_FULLSCREEN | SDL_WINDOW_OPENGL);
+    renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_ACCELERATED);
 
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //red to max to tell us that sdl has initialised
+    SDL_RenderClear(renderer);
+    SDL_RenderPresent(renderer);
+
+    texture = SDL_CreateTexture(sdlRenderer,
+                               SDL_PIXELFORMAT_ARGB8888,
+                               SDL_TEXTUREACCESS_STREAMING,
+                               X_width, X_height);
     if(screen == NULL) {
-    	I_Error("SDL setting video mode error");
+    	I_Error("SDL window creation error");
     }
 
     if (multiply == 1)
-    	screens[0] = (byte*) (screen->pixels);
+    	screens[0] = malloc(X_width * X_height)
     else
     	I_Error("Unsupported Mode");
 
@@ -109,7 +126,6 @@ void I_InitGraphics(void)
 void I_ShutdownGraphics(void)
 {
   // Freeing SDL screen
-  SDL_FreeSurface(screen);
 }
 
 void I_UpdateNoBlit (void)
@@ -119,7 +135,15 @@ void I_UpdateNoBlit (void)
 
 void I_FinishUpdate (void)
 {
-	SDL_Flip(screen);
+	for (i=0 ; i<(X_width * X_height) ; i++)
+	{
+		SDL_Color color = palatte[screens[0][i]];
+		pixels[i] = (255 << 24) | (color.r << 16) | (color.g << 8) | (color.b);
+	}
+	SDL_UpdateTexture(texture, NULL, pixels, 640 * sizeof (uint32_t));
+	SDL_RenderClear(renderer);
+	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	SDL_RenderPresent(renderer);
 }
 
 
@@ -127,7 +151,6 @@ void I_FinishUpdate (void)
 //	Palette Stuff
 //
 
-static SDL_Color colors[256];
 
 void I_SetPalette (byte* palette)
 {
@@ -154,9 +177,6 @@ void I_SetPalette (byte* palette)
 	    	c = gammatable[usegamma][*palette++];
 	    	colors[i].b = (c<<8) + c;
 	    }
-
-	    // store the colors to the current colormap
-	    SDL_SetColors(screen, colors, 0, 256);
 
 	}
 }
