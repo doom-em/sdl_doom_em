@@ -101,7 +101,7 @@ void I_InitGraphics(void)
                           SDL_WINDOWPOS_UNDEFINED,
                           SDL_WINDOWPOS_UNDEFINED,
                           X_width, X_height,
-                          SDL_WINDOW_FULLSCREEN | SDL_WINDOW_OPENGL);
+                          SDL_WINDOW_OPENGL);
     renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_ACCELERATED);
 
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //red to max to tell us that sdl has initialised
