@@ -97,12 +97,7 @@ void I_InitGraphics(void)
         I_Error((char*)SDL_GetError());
     }
 
-    screen = SDL_CreateWindow("DOOM: SDL Edition",
-                          SDL_WINDOWPOS_UNDEFINED,
-                          SDL_WINDOWPOS_UNDEFINED,
-                          X_width, X_height,
-                          SDL_WINDOW_OPENGL);
-    renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_ACCELERATED);
+    SDL_CreateWindowAndRenderer(X_width, X_height, 0, &screen, &renderer);
 
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //red to max to tell us that sdl has initialised
     SDL_RenderClear(renderer);
