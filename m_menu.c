@@ -32,6 +32,7 @@ rcsid[] = "$Id: m_menu.c,v 1.7 1997/02/03 22:45:10 b1 Exp $";
 #include <stdlib.h>
 #include <ctype.h>
 
+#include <emscripten.h>
 
 #include "doomdef.h"
 #include "dstrings.h"
@@ -517,10 +518,13 @@ void M_ReadSaveStrings(void)
 	
     for (i = 0;i < load_end;i++)
     {
+	EM_ASM(
+		FS.syncfs(function (err) {});
+	);
 	if (M_CheckParm("-cdrom"))
 	    sprintf(name,"c:\\doomdata\\"SAVEGAMENAME"%d.dsg",i);
 	else
-	    sprintf(name,SAVEGAMENAME"%d.dsg",i);
+	    sprintf(name,"/saves/"SAVEGAMENAME"%d.dsg",i);
 
 	handle = open (name, O_RDONLY | 0, 0666);
 	if (handle == -1)
@@ -583,7 +587,7 @@ void M_LoadSelect(int choice)
     if (M_CheckParm("-cdrom"))
 	sprintf(name,"c:\\doomdata\\"SAVEGAMENAME"%d.dsg",choice);
     else
-	sprintf(name,SAVEGAMENAME"%d.dsg",choice);
+	sprintf(name,"/saves/"SAVEGAMENAME"%d.dsg",choice);
     G_LoadGame (name);
     M_ClearMenus ();
 }
