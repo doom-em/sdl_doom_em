@@ -70,7 +70,7 @@ static int	multiply=1;
 
 uint32_t ColorToUint(int R, int G, int B)
 {
-        return (uint32_t)((255 << 24)+ (R << 16) + (G << 8) + (B << 0));
+        return (uint32_t)((UINT32_C(255) << 24)+ (UINT32_C(R) << 16) + (UINT32_C(G) << 8) + (UINT32_C(B) << 0));
 }
 
 // Graphics initialization with SDL
