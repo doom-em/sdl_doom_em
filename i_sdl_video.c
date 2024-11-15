@@ -116,7 +116,7 @@ void I_InitGraphics(void)
     }
 
     if (multiply == 1)
-    	screens[0] = malloc(X_width * X_height);
+    	screens[0] = malloc(X_width * X_height * sizeof(uint32_t));
     else
     	I_Error("Unsupported Mode");
 
@@ -142,7 +142,7 @@ void I_FinishUpdate (void)
 	for (i=0 ; i<(X_width * X_height) ; i++)
 	{
 		color = colors[screens[0][i]];
-		pixels[i] = ColorToUint(color.r, color.g, color.b);
+		*(pixels + i) = ColorToUint(color.r, color.g, color.b);
 	}
 	SDL_UpdateTexture(texture, NULL, pixels, 640 * sizeof (uint32_t));
 	SDL_RenderClear(renderer);
