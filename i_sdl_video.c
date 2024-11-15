@@ -132,17 +132,17 @@ void I_UpdateNoBlit (void)
 void I_FinishUpdate (void)
 {
 	register int	       i;
-	SDL_Color color;
+	register SDL_Color color;
 
-	
+	/*
 	for (i=0 ; i<(X_width * X_height) ; i++)
 	{
 		color = colors[screens[0][i]];
-		pixels[i] = *((uint32_t *) &color);
+		//pixels[i] = *((uint32_t *) &color);
 	}
 	SDL_UpdateTexture(texture, NULL, pixels, 640 * sizeof (uint32_t));
 	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	SDL_RenderCopy(renderer, texture, NULL, NULL);*/
 	SDL_RenderPresent(renderer);
 }
 
