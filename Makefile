@@ -6,7 +6,7 @@
 #
 CC=  emcc # gcc or g++
 
-CFLAGS=-m32 -g -s USE_SDL=2 -Wall -DNORMALUNIX -DLINUX -DSDL # -DUSEASM 
+CFLAGS=-m32 -O3 -fsanitize=undefined -g -s USE_SDL=2 -Wall -DNORMALUNIX -DLINUX -DSDL # -DUSEASM 
 LDFLAGS=# -L/usr/lib/i386-linux-gnu/
 LIBS=-lSDL -lopenal #-lnsl -lm
 
