@@ -1177,10 +1177,13 @@ void D_DoomMain (void)
     p = M_CheckParm ("-loadgame");
     if (p && p < myargc-1)
     {
+	EM_ASM(
+		FS.syncfs(function (err) {});
+	);
 	if (M_CheckParm("-cdrom"))
 	    sprintf(file, "c:\\doomdata\\"SAVEGAMENAME"%c.dsg",myargv[p+1][0]);
 	else
-	    sprintf(file, SAVEGAMENAME"%c.dsg",myargv[p+1][0]);
+	    sprintf(file, "/saves/"SAVEGAMENAME"%c.dsg",myargv[p+1][0]);
 	G_LoadGame (file);
     }
 	
