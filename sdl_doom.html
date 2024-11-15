@@ -9,11 +9,14 @@
     <meta property="og:image" content="https://buggem.github.io/sdl_doom_em/doomlogo.png" />
     <meta property="og:url" content="https://buggem.github.io/sdl_doom_em/" />
     <title>DOOM in the Browser</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <link rel="apple-touch-icon" href="./doomicon.png"/>
     <link rel="shortcut icon" href="./doomicon.png"/>
     <style>
 body {
-  font-family: arial;
+  font-family: "VT323", arial;
   margin: 0;
   padding: none;
   background-color: black;
@@ -92,6 +95,7 @@ canvas.emscripten { border: 0px none; background-color: black; }
   vertical-align: top;
   margin-top: 30px;
   margin-right: 20px;
+  color: white;
 }
 
 #output {
@@ -106,7 +110,7 @@ canvas.emscripten { border: 0px none; background-color: black; }
   display: block;
   background-color: black;
   color: white;
-  font-family: 'Lucida Console', Monaco, monospace;
+  font-family: "VT323", "Ubuntu Mono", "Lucida Console", monospace;
   outline: none;
 }
 </style>
