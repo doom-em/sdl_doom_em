@@ -144,7 +144,7 @@ void I_FinishUpdate (void)
 		color = colors[screens[0][i]];
 		*(pixels + i) = ColorToUint(color.r, color.g, color.b);
 	}
-	SDL_UpdateTexture(texture, NULL, pixels, 640 * sizeof (uint32_t));
+	SDL_UpdateTexture(texture, NULL, pixels, 320 * sizeof (uint32_t));
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
 	SDL_RenderPresent(renderer);
