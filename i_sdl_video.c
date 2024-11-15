@@ -68,9 +68,9 @@ int		X_height;
 // to use ....
 static int	multiply=1;
 
-uint32_t ColorToUint(int r, int g, int b)
+uint32_t ColorToUint(uint8_t r, uint8_t g, uint8_t b)
 {
-        return (uint32_t)(((uint32_t)255 << 24)+ ((uint32_t)r << 16) + ((uint32_t)g << 8) + ((uint32_t)b << 0));
+        return (uint32_t)((0xFF << 24) | (r << 16) | (g << 8) | (b << 0));
 }
 
 // Graphics initialization with SDL
@@ -142,9 +142,9 @@ void I_FinishUpdate (void)
 	for (i=0 ; i<(X_width * X_height) ; i++)
 	{
 		color = colors[screens[0][i]];
-		//*(pixels + i) = ColorToUint(color.r, color.g, color.b);
+		pixels[i] = ColorToUint(color.r, color.g, color.b);
 	}
-	SDL_UpdateTexture(texture, NULL, pixels, 320 * sizeof (uint32_t));
+	SDL_UpdateTexture(texture, NULL, pixels, X_width * sizeof (uint32_t));
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
 	SDL_RenderPresent(renderer);
