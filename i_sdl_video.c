@@ -95,7 +95,7 @@ void I_InitGraphics(void)
 
     X_width = SCREENWIDTH * multiply;
     X_height = SCREENHEIGHT * multiply;
-    pixels = malloc(X_width * X_height);
+    pixels = malloc(X_width * X_height * sizeof(uint32_t));
     
     if ( SDL_Init(SDL_INIT_VIDEO) != 0 ) {
         I_Error((char*)SDL_GetError());
@@ -139,7 +139,7 @@ void I_FinishUpdate (void)
 	register SDL_Color color;
 
 	
-	for (i=0 ; i<(320) ; i++)
+	for (i=0; i<(X_width * X_height); i++)
 	{
 		color = colors[screens[0][i]];
 		pixels[i] = ColorToUint(color.r, color.g, color.b);
