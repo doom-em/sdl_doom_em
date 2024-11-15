@@ -57,6 +57,8 @@ rcsid[] = "$Id: i_x.c,v 1.6 1997/02/03 22:45:10 b1 Exp $";
 SDL_Window      *screen = NULL;
 SDL_Renderer    *renderer = NULL;
 SDL_Texture     *texture = NULL;
+SDL_Surface     *surface = NULL;
+SDL_Palette     *sdlPal = NULL;
 static SDL_Color colors[256];
 static uint32_t *pixels;
 int		 X_width;
@@ -107,6 +109,10 @@ void I_InitGraphics(void)
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
 
+    sdlPal = SDL_AllocPalette(256);
+    surface = SDL_CreateRGBSurface(0, X_width, X_height, 8, 0, 0, 0, 0);
+    SDL_SetSurfacePalette(surface, sdlPal);
+
     texture = SDL_CreateTexture(renderer,
                                SDL_PIXELFORMAT_ARGB8888,
                                SDL_TEXTUREACCESS_STREAMING,
@@ -126,6 +132,8 @@ void I_InitGraphics(void)
 void I_ShutdownGraphics(void)
 {
   // Freeing SDL screen
+  SDL_FreePalette(palette);
+  SDL_FreeSurface(surface);
   SDL_DestroyTexture(texture);
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(screen);
@@ -144,12 +152,11 @@ void I_FinishUpdate (void)
 	register SDL_Color color;
 
 	
-	for (i=0; i<(X_width * X_height); i++)
-	{
-		color = colors[screens[0][i]];
-		pixels[i] = ColorToUint(color.r, color.g, color.b);
-	}
-	SDL_UpdateTexture(texture, NULL, pixels, X_width * sizeof (uint32_t));
+	SDL_LockSurface(surface);
+	memcpy(surface->pixels, screens[0], X_width * X_height * sizeof(byte)); 
+	SDL_UnlockSurface(surface);
+	SDL_DestroyTexture(texture);
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
 	SDL_RenderPresent(renderer);
@@ -186,7 +193,8 @@ void I_SetPalette (byte* palette)
 	    	c = gammatable[usegamma][*palette++];
 	    	colors[i].b = (c<<8) + c;
 	    }
-
+	    SDL_SetPaletteColors(sdlPal, colors, 0, 256);
+	    
 	}
 }
 
