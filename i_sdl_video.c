@@ -54,13 +54,13 @@ rcsid[] = "$Id: i_x.c,v 1.6 1997/02/03 22:45:10 b1 Exp $";
 // SDL pixel color depth
 #define SDL_BPP 8
 
-SDL_Window*     screen = NULL;
-SDL_Renderer*   renderer = NULL;
-SDL_Texture*    texture = NULL;
+SDL_Window      *screen = NULL;
+SDL_Renderer    *renderer = NULL;
+SDL_Texture     *texture = NULL;
 static SDL_Color colors[256];
-uint32_t *pixels;
-int		X_width;
-int		X_height;
+static uint32_t *pixels;
+int		 X_width;
+int	         X_height;
 
 // Blocky mode,
 // replace each 320x200 pixel with multiply*multiply pixels.
@@ -126,6 +126,11 @@ void I_InitGraphics(void)
 void I_ShutdownGraphics(void)
 {
   // Freeing SDL screen
+  SDL_DestroyTexture(texture);
+  SDL_DestroyRenderer(renderer);
+  SDL_DestroyWindow(screen);
+
+  SDL_Quit();
 }
 
 void I_UpdateNoBlit (void)
