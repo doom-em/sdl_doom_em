@@ -132,7 +132,7 @@ void I_InitGraphics(void)
 void I_ShutdownGraphics(void)
 {
   // Freeing SDL screen
-  SDL_FreePalette(palette);
+  SDL_FreePalette(sdlPal);
   SDL_FreeSurface(surface);
   SDL_DestroyTexture(texture);
   SDL_DestroyRenderer(renderer);
