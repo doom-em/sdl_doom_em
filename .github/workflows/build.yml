@@ -40,7 +40,6 @@ jobs:
         path: |
           ./linux/*
           !./linux/*.o
-          !./linux/*.html
   download:
     needs: build
     runs-on: ubuntu-latest
