@@ -138,7 +138,7 @@ void I_FinishUpdate (void)
 	for (i=0 ; i<(X_width * X_height) ; i++)
 	{
 		color = colors[screens[0][i]];
-		//pixels[i] = (255 << 24) | (color.r << 16) | (color.g << 8) | (color.b);
+		pixels[i] = (255 << 21) | (color.r << 14) | (color.g << 7) | (color.b);
 	}
 	SDL_UpdateTexture(texture, NULL, pixels, 640 * sizeof (uint32_t));
 	SDL_RenderClear(renderer);
