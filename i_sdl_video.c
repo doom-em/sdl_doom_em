@@ -139,7 +139,7 @@ void I_FinishUpdate (void)
 	register SDL_Color color;
 
 	
-	for (i=0 ; i<(X_width * X_height) ; i++)
+	for (i=0 ; i<(320) ; i++)
 	{
 		color = colors[screens[0][i]];
 		pixels[i] = ColorToUint(color.r, color.g, color.b);
