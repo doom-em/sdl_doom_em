@@ -132,7 +132,7 @@ void I_UpdateNoBlit (void)
 void I_FinishUpdate (void)
 {
 	register int	       i;
-	register SDL_Color color;
+	SDL_Color color;
 
 	
 	for (i=0 ; i<(X_width * X_height) ; i++)
