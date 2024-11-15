@@ -1,4 +1,4 @@
-name: Build & Deploy Engine
+name: Build & Deploy DOOM
 on: [push, pull_request]
 jobs:
 #  cleanup:
