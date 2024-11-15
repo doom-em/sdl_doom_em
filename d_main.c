@@ -812,7 +812,19 @@ void D_DoomMain (void)
 {
     int             p;
     char                    file[256];
+	
+    EM_ASM(
+        // Make a directory other than '/'
+        FS.mkdir('/saves');
+        // Then mount with IDBFS type
+        FS.mount(IDBFS, {}, '/saves');
 
+        // Then sync
+        FS.syncfs(true, function (err) {
+            // Error
+        });
+    );
+	
     FindResponseFile ();
 	
     IdentifyVersion ();
