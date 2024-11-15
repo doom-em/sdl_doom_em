@@ -138,7 +138,7 @@ void I_FinishUpdate (void)
 	for (i=0 ; i<(X_width * X_height) ; i++)
 	{
 		color = colors[screens[0][i]];
-		pixels[i] = (255 << 24) | (color.r << 16) | (color.g << 8) | (color.b);
+		//pixels[i] = (255 << 24) | (color.r << 16) | (color.g << 8) | (color.b);
 	}
 	SDL_UpdateTexture(texture, NULL, pixels, 640 * sizeof (uint32_t));
 	SDL_RenderClear(renderer);
@@ -349,9 +349,9 @@ void I_StartTic (void)
 
     SDL_Event sdl_event;
 
-    /*while (SDL_PollEvent(&sdl_event))
+    while (SDL_PollEvent(&sdl_event))
     	I_ProcessEvent(&sdl_event);
-    */
+    
     // Warp the pointer back to the middle of the window
     //  or it will wander off - that is, the game will
     //  loose input focus within X11.
