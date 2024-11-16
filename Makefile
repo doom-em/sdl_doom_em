@@ -8,7 +8,7 @@ CC=  emcc # gcc or g++
 
 CFLAGS=-m32 -O3 -fsanitize=undefined -fno-strict-aliasing -g -s USE_SDL=2 -Wall -DNORMALUNIX -DLINUX -DSDL # -DUSEASM 
 LDFLAGS=# -L/usr/lib/i386-linux-gnu/
-LIBS=-lSDL -lopenal #-lnsl -lm
+LIBS=-lSDL -lopenal -lidbfs.js #-lnsl -lm
 
 # subdirectory for objects
 O=linux
