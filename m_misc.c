@@ -35,6 +35,7 @@ rcsid[] = "$Id: m_misc.c,v 1.6 1997/02/03 22:45:10 b1 Exp $";
 
 #include <ctype.h>
 
+#include <emscripten.h>
 
 #include "doomdef.h"
 
@@ -125,7 +126,9 @@ M_WriteFile
 
     count = write (handle, source, length);
     close (handle);
-	
+    EM_ASM(
+		FS.syncfs(function (err) {});
+    );
     if (count < length)
 	return false;
 		
@@ -144,7 +147,9 @@ M_ReadFile
     int	handle, count, length;
     struct stat	fileinfo;
     byte		*buf;
-	
+    EM_ASM(
+		FS.syncfs(function (err) {});
+    );
     handle = open (name, O_RDONLY | O_BINARY, 0666);
     if (handle == -1)
 	I_Error ("Couldn't read file %s", name);
@@ -154,7 +159,7 @@ M_ReadFile
     buf = Z_Malloc (length, PU_STATIC, NULL);
     count = read (handle, buf, length);
     close (handle);
-	
+
     if (count < length)
 	I_Error ("Couldn't read file %s", name);
 		
