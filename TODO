@@ -7,9 +7,7 @@
 - get DOOM Public License from id
 
 -----------------------------------------------
-- fix bug on quit screen
-
-- port from X11 to SDL
+- fix bug on quit screen (what bug?)
 
 - remove m_fixed, switch to floating point
   More stable, and prolly even faster.
@@ -18,20 +16,7 @@
   Well, the HUD/STBar stuff is tied to the
   scales implied by the graphics. Rather do
   GLDOOM and use texture mapping.
-
-- fix aspect ratio?
-  320x200 is nothing viable nowadays.
-  A 320x240 base (4:3) would be a lot better.
-  See above on width/height.
  
-- limited look up/down by y-shearing?
-  Prolly not worth it, rather switch to GLDOOM.
-
-- switch to C++?
-  The action function pointers have varying
-  argument lists (no parameter, one, etc.).
-  C++ doesn't like that much. A major rewrite.
-
 - switch to doommain.c plus libdoom? Have 
   libref, libgame etc.?
   Another major rewrite.
@@ -73,9 +58,6 @@
 
 - remove all game version checks
 
-- different handling of Demo - don't
-   exit on "different game version"
-
 - how about shareware/retail "You are here"
    intermission animation? Wasn't in
    commercial (DOOM 2).
@@ -89,7 +71,8 @@
    or removing THINGS w/o sprites etc.
 
 - client/server? I'd suggest ripping off some stuff
-   from the abandoned IBM WebView project
+   from the abandoned IBM WebView project (dead and 
+   not relevant anymore, ditched)
 
 - Blockmap
    The BLOCKMAP lump might be (partly) redundant,
@@ -108,7 +91,8 @@
    make sure the players falls off far enough to
    avoid getting "stuck in monster".
 
-- remove obsolete menus (Detail. Music Volume?)
+- remove obsolete menus
+  Music is staying, get off my lawn
 
 - clip explosion range damage (and sprites) using
    REJECT? That is, if one Sector/SSector not
