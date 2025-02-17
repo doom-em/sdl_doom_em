@@ -1,0 +1,3 @@
+[submodule "sndserver"]
+	path = sndserver
+	url = https://github.com/doom-em/sndserv_em.git
