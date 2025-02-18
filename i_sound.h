@@ -28,7 +28,7 @@
 // UNIX hack, to be removed.
 #ifdef SNDSERV
 #include <stdio.h>
-extern FILE* sndserver;
+extern int sndserver;
 extern char* sndserver_filename;
 #endif
 

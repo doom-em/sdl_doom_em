@@ -6,15 +6,19 @@
 #
 CC=  emcc # gcc or g++
 
-CFLAGS=-m32 -O3 -fsanitize=undefined -fno-strict-aliasing -g -s USE_SDL=2 -Wall -DNORMALUNIX -DLINUX -DSDL # -DUSEASM 
+CFLAGS=-m32 -O3 -fsanitize=undefined -fno-strict-aliasing -g -s USE_SDL=2 -s USE_SDL_MIXER=2 -Wall -DDOOM -DNORMALUNIX -DLINUX -DSDL # -DUSEASM 
 LDFLAGS=# -L/usr/lib/i386-linux-gnu/
-LIBS=-lSDL -lopenal -lidbfs.js #-lnsl -lm
+LIBS=-lSDL -lopenal -lidbfs.js -lSDL2_mixer #-lnsl -lm
 
 # subdirectory for objects
 O=linux
 
 # not too sophisticated dependency
 OBJS=				\
+		$(O)/sndserver/soundsrv.o \
+		$(O)/sndserver/sounds.o \
+#		$(O)/sndserver/wadread.o \
+		$(O)/sndserver/linux.o \
 		$(O)/doomdef.o		\
 		$(O)/doomstat.o		\
 		$(O)/dstrings.o		\

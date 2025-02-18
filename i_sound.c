@@ -33,6 +33,7 @@ rcsid[] = "$Id: i_unix.c,v 1.5 1997/02/03 22:45:10 b1 Exp $";
 
 #include <sys/time.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 
 #ifndef LINUX
 #include <sys/filio.h>
@@ -59,10 +60,15 @@ rcsid[] = "$Id: i_unix.c,v 1.5 1997/02/03 22:45:10 b1 Exp $";
 
 #include "doomdef.h"
 
+
+// sndserver stuff
 // UNIX hack, to be removed.
 #ifdef SNDSERV
+#include <pthread.h>
+#include "sndserver/soundsrv.h"
+pthread_t sndserver_thread;
 // Separate sound server process.
-FILE*	sndserver=0;
+int	sndserver=0;
 char*	sndserver_filename = "./sndserver ";
 #elif SNDINTR
 
@@ -480,10 +486,15 @@ I_StartSound
   priority = 0;
   
 #ifdef SNDSERV 
-    if (sndserver)
+    if (sndserver != -1)
     {
-	fprintf(sndserver, "p%2.2x%2.2x%2.2x%2.2x\n", id, pitch, vol, sep);
-	fflush(sndserver);
+      char buffer[16];  // Enough space for formatted output
+      int len = snprintf(buffer, sizeof(buffer), "p%2.2x%2.2x%2.2x%2.2x\n", id, pitch, vol, sep);
+
+      if (len > 0) {
+          write(sndserver, buffer, len);  // Write to the file descriptor
+          fsync(sndserver);  // Ensure data is written immediately
+      }
     }
     // warning: control reaches end of non-void function.
     return id;
@@ -696,8 +707,8 @@ void I_ShutdownSound(void)
   if (sndserver)
   {
     // Send a "quit" command.
-    fprintf(sndserver, "q\n");
-    fflush(sndserver);
+    write(sndserver, "q\n", 2);  // Write to the file descriptor
+    fsync(sndserver);
   }
 #else
   // Wait till all pending sounds are finished.
@@ -740,21 +751,15 @@ I_InitSound()
 #ifdef SNDSERV
   char buffer[256];
   
-  if (getenv("DOOMWADDIR"))
-    sprintf(buffer, "%s/%s",
-	    getenv("DOOMWADDIR"),
-	    sndserver_filename);
-  else
-    sprintf(buffer, "%s", sndserver_filename);
-  
-  // start sound process
-  if ( !access(buffer, X_OK) )
-  {
-    strcat(buffer, " -quiet");
-    sndserver = popen(buffer, "w");
-  }
-  else
+  mkfifo("/tmp/sndserv_em_pipe", 0666);
+
+  sndserver = open("/tmp/sndserv_em_pipe", O_WRONLY);
+  if(pthread_create(&sndserver_thread, NULL, SNDSERV_mainthread, NULL) == 0) {
+    printf("Launched sndserver thread.\n");
+    pthread_detach(sndserver_thread);
+  } else {
     fprintf(stderr, "Could not start sound server [%s]\n", buffer);
+  }
 #else
     
   int i;
