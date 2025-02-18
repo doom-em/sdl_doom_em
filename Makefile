@@ -18,6 +18,7 @@ OBJS=				\
 		$(O)/sndserver/soundsrv.o \
 		$(O)/sndserver/sounds.o \
 		$(O)/sndserver/linux.o \
+		$(O)/sndserver/wadread.o \
 		$(O)/doomdef.o		\
 		$(O)/doomstat.o		\
 		$(O)/dstrings.o		\
